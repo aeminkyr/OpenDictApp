@@ -9,6 +9,8 @@ const stackNavigatorOptions = {
   headerShown: false,
 };
 
+
+
 const AppNavigator = createStackNavigator(
   {
     Login: { screen: Login },

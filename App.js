@@ -5,6 +5,7 @@ import AppNavigator from "./src/navigations/Navigator";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
+
 export default class App extends React.Component {
   state = {
     isFontLoaded: false,
@@ -17,6 +18,9 @@ export default class App extends React.Component {
       Regular: require("./src/fonts/Montserrat-Regular.otf"),
     });
     this.setState({ isFontLoaded: true });
+
+    
+
   }
 
   render() {
