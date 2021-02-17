@@ -1,51 +1,81 @@
 import React from "react";
-import { StyleSheet, Text, View, StatusBar, Button } from "react-native";
-import { StackActions, NavigationActions } from "react-navigation";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
-export default class Register extends React.Component {
-  state = {
-    token: "",
-  };
+import { Icon } from 'react-native-elements';
+import Ev from "../screens/Tabs/Ev";
+import Profile from "../screens/Tabs/Profile";
 
-  logout = () => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: "Login" })],
-    });
-    this.props.navigation.dispatch(resetAction);
-  };
 
-  componentDidMount() {
-    const getData = async () => {
-      try {
-        const value = await AsyncStorage.getItem("@token");
-        if (value !== null) {
-          // value previously stored
-          this.setState({ token: value });
-          console.log(value);
-        }
-      } catch (e) {
-        // error reading value
-      }
-    };
 
-    getData();
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Eee giriş yaptın ne oldu? {this.state.token}</Text>
-        <Button title="Log out" onPress={this.logout} />
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight,
+/*
+export default createMaterialBottomTabNavigator(
+  {
+    Feed: { screen: Ev },
+    Settings: { screen: Settings },
+   
   },
-});
+  {
+    initialRouteName: 'Feed',
+    activeColor: '#f0edf6',
+    inactiveColor: '#3e2465',
+    barStyle: { backgroundColor: '#694fad' },
+  }
+);
+
+*/
+
+
+
+
+const MainTabs = createMaterialBottomTabNavigator({
+  Feed: {
+    screen: Ev,
+    navigationOptions: {
+      tabBarLabel: 'Akış',
+    },
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      tabBarLabel: 'Profil',
+    },
+  },
+
+},
+{
+  
+  initialRouteName: 'Feed',
+  activeColor: '#f0edf6',
+  inactiveColor: 'black',
+  barStyle: { backgroundColor: '#00716f' },
+  tabBarOptions: {
+    activeBackgroundColor: '#fff',
+    inactiveBackgroundColor: '#fff',
+    activeTintColor: '#405BDB',
+    inactiveTintColor: '#9B9B9B',
+  },
+  defaultNavigationOptions:({navigation}) => ({
+    tabBarIcon: ({ tintColor }) => {
+      let { routeName } = navigation.state;
+      let iconName;
+      if(routeName==="Feed") {
+           iconName = 'eye'
+      } else if(routeName =="Profile"){
+           iconName = 'user'
+
+      }
+      return (<Icon
+name={iconName}
+type='evilicon'
+color={tintColor}
+/>)
+    }
+  })
+}
+);
+
+export default createAppContainer(MainTabs);
+
+
