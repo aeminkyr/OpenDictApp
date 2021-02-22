@@ -1,37 +1,14 @@
 import React from "react";
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import { Icon } from 'react-native-elements';
-import Ev from "../screens/Tabs/Ev";
-import Profile from "../screens/Tabs/Profile";
-
-
-
-/*
-export default createMaterialBottomTabNavigator(
-  {
-    Feed: { screen: Ev },
-    Settings: { screen: Settings },
-   
-  },
-  {
-    initialRouteName: 'Feed',
-    activeColor: '#f0edf6',
-    inactiveColor: '#3e2465',
-    barStyle: { backgroundColor: '#694fad' },
-  }
-);
-
-*/
-
-
-
+import Flow from "./BottomTabs/Flow";
+import Profile from "../screens/BottomTabs/Profile";
 
 const MainTabs = createMaterialBottomTabNavigator({
-  Feed: {
-    screen: Ev,
+  Flow: {
+    screen: Flow,
     navigationOptions: {
       tabBarLabel: 'Akış',
     },
@@ -39,14 +16,16 @@ const MainTabs = createMaterialBottomTabNavigator({
   Profile: {
     screen: Profile,
     navigationOptions: {
-      tabBarLabel: 'Profil',
+      tabBarLabel: 'Profil'
     },
   },
+  
 
 },
 {
-  
-  initialRouteName: 'Feed',
+  animationEnabled: true,
+
+  initialRouteName: 'Flow',
   activeColor: '#f0edf6',
   inactiveColor: 'black',
   barStyle: { backgroundColor: '#00716f' },
@@ -60,7 +39,7 @@ const MainTabs = createMaterialBottomTabNavigator({
     tabBarIcon: ({ tintColor }) => {
       let { routeName } = navigation.state;
       let iconName;
-      if(routeName==="Feed") {
+      if(routeName==="Flow") {
            iconName = 'eye'
       } else if(routeName =="Profile"){
            iconName = 'user'

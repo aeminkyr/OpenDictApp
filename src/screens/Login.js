@@ -74,7 +74,7 @@ export default class Login extends React.Component {
         storeData(res.token);
 
         if (res.login != -1) {
-          Alert.alert("There we go!", "Login Ok!");
+         // Alert.alert("There we go!", "Login Ok!");
           this.setState({ logged_in: true });
         } else Alert.alert("Uyarı", "Kullanıcı doğrulanamadı");
       })
